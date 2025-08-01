@@ -1,6 +1,7 @@
 package com.polarbookshop.catalogservice.domain;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
@@ -17,7 +18,7 @@ public record Book (
   @NotBlank(message = "Book Author must be defined.")
   String author,
 
-  @NotBlank(message = "Book Price must be defined.")
+  @NotNull(message = "Book Price must be defined.")
   @Positive(message = "Price must be greater than Zero.")
   Double price
 ) {}
