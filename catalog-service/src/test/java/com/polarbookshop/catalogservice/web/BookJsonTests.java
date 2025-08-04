@@ -37,7 +37,7 @@ public class BookJsonTests {
                 " \"price\": 9.90\n" +
                 "}";
         assertThat(json.parse(jsonFormat)).usingRecursiveComparison().
-                isEqualTo(new Book("1234567891", "Title",
+                isEqualTo(new Book("1234567890", "Title",
                         "Author", 9.90));
     }
 }
