@@ -14,9 +14,6 @@ spring:
         multiplier: 1.1
         max-interval: 2000
       #fail-fast: false
-  sql:
-    init:
-      mode: always
 
   datasource:
     username: user
