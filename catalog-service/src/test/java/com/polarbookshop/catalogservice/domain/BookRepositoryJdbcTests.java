@@ -36,7 +36,7 @@ public class BookRepositoryJdbcTests {
 
     @Test
     void deleteBookAfterInserting() {
-        String isbn = "1234567890";
+        String isbn = "1234117890";
         Book book = Book.of(isbn, "ToBeDeleted", "Mr.K", 3.76);
         Book savedBook = jdbcAggregateTemplate.insert(book);
         // verify it exists
@@ -51,7 +51,7 @@ public class BookRepositoryJdbcTests {
 
     @Test
     void editBookAfterInserting() {
-        String isbn = "1234567899";
+        String isbn = "1234567890";
         Book book = Book.of(isbn, "Edited", "Me", 8.21);
         Book savedBook = jdbcAggregateTemplate.insert(book);
         // verify it exists
