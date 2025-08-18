@@ -51,7 +51,7 @@ public class BookRepositoryJdbcTests {
 
     @Test
     void editBookAfterInserting() {
-        String isbn = "1234567890";
+        String isbn = "6224567890";
         Book book = Book.of(isbn, "Edited", "Me", 8.21, null);
         Book savedBook = jdbcAggregateTemplate.insert(book);
         // verify it exists
