@@ -18,14 +18,14 @@ public class BookValidationTests {
 
     @Test
     void allFieldsCorrectShouldSucceed() {
-        var book = Book.of("1234567890", "TestTitle", "AuthorH", 10.90);
+        var book = Book.of("1234567890", "TestTitle", "AuthorH", 10.90, null);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertThat(violations).isEmpty();
     }
 
     @Test
     void IsbnDefinedButIncorrectShouldFail() {
-        var book = Book.of("1234567890101001010102910", "TesterTitle", "AuthorF", 10.90);
+        var book = Book.of("1234567890101001010102910", "TesterTitle", "AuthorF", 10.90, null);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertThat(violations).hasSize(1);
         assertThat(violations.iterator().next().getMessage()).isEqualTo(
@@ -34,7 +34,7 @@ public class BookValidationTests {
 
     @Test
     void priceIsDefinedButNegativeShouldFail() {
-        var book = Book.of("1234567890", "TestTitle", "AuthorK", -10.21);
+        var book = Book.of("1234567890", "TestTitle", "AuthorK", -10.21, null);
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
         assertThat(violations).hasSize(1);
         assertThat(violations.iterator().next().getMessage()).isEqualTo(

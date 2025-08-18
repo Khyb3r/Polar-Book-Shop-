@@ -21,8 +21,8 @@ public class BookDataLoader {
     @EventListener(ApplicationReadyEvent.class)
     public void loadBookTestData() {
         bookRepository.deleteAll();
-        var book1 = Book.of("1234567890", "Title", "Mr.A", 10.99);
-        var book2 = Book.of("0987654321", "Title2", "Mr.B", 100.99);
+        var book1 = Book.of("1234567890", "Title", "Mr.A", 10.99, null);
+        var book2 = Book.of("0987654321", "Title2", "Mr.B", 100.99, null);
         bookRepository.saveAll(List.of(book1, book2));
     }
 }

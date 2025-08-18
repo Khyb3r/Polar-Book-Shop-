@@ -27,7 +27,7 @@ public class BookRepositoryJdbcTests {
     @Test
     void findBookByIsbnWhenExisting() {
         String bookIsbn = "0123456789";
-        Book book = Book.of(bookIsbn, "NewTestBook", "Mr.Me", 10.76);
+        Book book = Book.of(bookIsbn, "NewTestBook", "Mr.Me", 10.76, null);
         jdbcAggregateTemplate.insert(book);
         Optional<Book> actualBook = bookRepository.findByIsbn(bookIsbn);
         assertThat(actualBook).isPresent();
@@ -37,7 +37,7 @@ public class BookRepositoryJdbcTests {
     @Test
     void deleteBookAfterInserting() {
         String isbn = "1234117890";
-        Book book = Book.of(isbn, "ToBeDeleted", "Mr.K", 3.76);
+        Book book = Book.of(isbn, "ToBeDeleted", "Mr.K", 3.76, null);
         Book savedBook = jdbcAggregateTemplate.insert(book);
         // verify it exists
         Optional<Book> actualBook = bookRepository.findByIsbn(isbn);
@@ -52,7 +52,7 @@ public class BookRepositoryJdbcTests {
     @Test
     void editBookAfterInserting() {
         String isbn = "1234567890";
-        Book book = Book.of(isbn, "Edited", "Me", 8.21);
+        Book book = Book.of(isbn, "Edited", "Me", 8.21, null);
         Book savedBook = jdbcAggregateTemplate.insert(book);
         // verify it exists
         Optional<Book> actualBook = bookRepository.findByIsbn(isbn);
@@ -65,6 +65,7 @@ public class BookRepositoryJdbcTests {
                 "New Edited Book",
                 "Me Still",
                 3.10,
+                savedBook.publisher(),
                 savedBook.createdDate(),
                 savedBook.lastModifiedDate(),
                 savedBook.version()

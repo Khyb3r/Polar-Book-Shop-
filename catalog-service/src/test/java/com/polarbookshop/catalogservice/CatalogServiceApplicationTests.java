@@ -19,7 +19,7 @@ class CatalogServiceApplicationTests {
 
 	@Test
 	void whenPostRequestThenBookCreated() {
-		var expectedBook = Book.of("1234567890", "Title", "Author", 9.90);
+		var expectedBook = Book.of("1234567890", "Title", "Author", 9.90, null);
 		webTestClient.post().uri("/books").bodyValue(expectedBook).exchange().expectStatus().isCreated().
 				expectBody(Book.class).value(actualBook -> {
 					assertThat(actualBook).isNotNull();
@@ -30,7 +30,7 @@ class CatalogServiceApplicationTests {
 	@Test
 	void whenPostRequestCreateBookAndWhenDeleteRequestDestroyBook() {
 		String isbn = "0987654321";
-		var book = Book.of(isbn, "AboutToDelete", "DeletedAuthor", 10.90);
+		var book = Book.of(isbn, "AboutToDelete", "DeletedAuthor", 10.90, null);
 		webTestClient.post().uri("/books").bodyValue(book).exchange().expectStatus().isCreated().
 				expectBody(Book.class).value(actualBook -> {
 					assertThat(actualBook).isNotNull();
@@ -43,7 +43,7 @@ class CatalogServiceApplicationTests {
 	@Test
 	void whenPutRequestBookEdited() {
 		String isbn = "1456172901";
-		var book = Book.of(isbn, "EditBook", "EditedAuthor", 4.40);
+		var book = Book.of(isbn, "EditBook", "EditedAuthor", 4.40, null);
 		// create book first then edit
 		webTestClient.post().uri("/books").bodyValue(book).exchange().expectStatus().isCreated()
 						.expectBody(Book.class).value(actualBook -> {
@@ -52,7 +52,7 @@ class CatalogServiceApplicationTests {
 				});
 
 		// put
-		var editedBook = Book.of(isbn, "EditedBookNow", "NewAuthor", 100.10);
+		var editedBook = Book.of(isbn, "EditedBookNow", "NewAuthor", 100.10, null);
 		webTestClient.put().uri("/books/{isbn}", isbn).bodyValue(editedBook).exchange()
 				.expectBody(Book.class).value(newBook -> {
 					assertThat(editedBook).isNotNull();
