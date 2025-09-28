@@ -37,6 +37,7 @@
       threads:
         max: 50
         min-spare: 5
+    address: 0.0.0.0
 
   polar:
     greeting: Welcome to the local book catalog!
