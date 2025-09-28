@@ -62,6 +62,7 @@ jobs:
           java-version: 17
           cache: gradle
       - name: Build container image
+        working-directory: "catalog-service"
         run: |
           chmod +x gradlew
           ./gradlew bootBuildImage --imageName ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:${{env.VERSION}}
