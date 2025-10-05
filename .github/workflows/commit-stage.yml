@@ -49,7 +49,7 @@ jobs:
           sudo mv kubeconform /usr/local/bin/
       - name: Validate Kubernetes Manifests
         run: |
-          kubeconform --strict -d catalog-service/k8s
+          kubeconform --strict catalog-service/k8s
 
   package:
     name: Package and Publish
