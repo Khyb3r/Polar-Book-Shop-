@@ -42,6 +42,15 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
+      - name: Install kubeconform
+        run: |
+          curl -L -o kubeconform.tar.gz https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz
+          tar xf kubeconform.tar.gz
+          sudo mv kubeconform /usr/local/bin/
+          kubeconform --version
+      - name: Validate Kubernetes Manifests
+        run: |
+          kubeconform --strict -d catalog-service/k8s
 
   package:
     name: Package and Publish
@@ -86,3 +95,5 @@ jobs:
           password: ${{secrets.GITHUB_TOKEN}}
       - name: Publish container image
         run: docker push ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:${{env.VERSION}}
+
+

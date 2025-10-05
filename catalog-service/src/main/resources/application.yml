@@ -1,6 +1,8 @@
   spring:
     application:
       name: catalog-service
+    lifecycle:
+      timeout-per-shutdown-phase: 15s
     config:
       import: "optional:configserver:"
     cloud:
@@ -38,6 +40,7 @@
         max: 50
         min-spare: 5
     address: 0.0.0.0
+    shutdown: graceful
 
   polar:
     greeting: Welcome to the local book catalog!

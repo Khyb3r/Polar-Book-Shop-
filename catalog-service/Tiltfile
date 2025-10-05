@@ -1,0 +1,17 @@
+# build
+custom_build(
+    # Container image name
+    ref = 'catalog-service',
+
+    # Building container image
+    command = './gradlew bootBuildImage --imageName $EXPECTED_REF',
+
+    # What to watch to trigger a new build
+    deps = ['build.gradle', 'src']
+)
+
+# deploy
+k8s_yaml(['k8s/deployment.yml', 'k8s/service.yml'])
+
+# manage
+k8s_resource('catalog-service', port_forwards=['9001'])
